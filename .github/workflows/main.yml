@@ -13,6 +13,11 @@ jobs:
       - name: Get source code
         uses: actions/checkout@v4
 
+      - name: Unpack project
+        run: |
+          unzip -q ELIOS_NOTES_Continued_v4.zip -d unpacked
+          test -f unpacked/ELIOS_NOTES/app/build.gradle.kts
+
       - name: Install Java 17
         uses: actions/setup-java@v4
         with:
@@ -25,13 +30,15 @@ jobs:
           gradle-version: '8.13'
 
       - name: Run unit tests
+        working-directory: unpacked/ELIOS_NOTES
         run: gradle :app:testDebugUnitTest
 
       - name: Build APK
+        working-directory: unpacked/ELIOS_NOTES
         run: gradle :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: ELIOS_NOTES-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          path: unpacked/ELIOS_NOTES/app/build/outputs/apk/debug/*.apk
