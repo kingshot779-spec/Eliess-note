@@ -42,3 +42,7 @@ jobs:
         with:
           name: ELIOS_NOTES-debug-apk
           path: unpacked/ELIOS_NOTES/app/build/outputs/apk/debug/*.apk
+      - name: Pin compatible Compose BOM
+        working-directory: unpacked/ELIOS_NOTES
+        run: sed -i 's/2026\.09\.00/2025.12.00/g' app/build.gradle.kts
+        
