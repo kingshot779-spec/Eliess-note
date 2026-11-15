@@ -18,13 +18,13 @@ jobs:
 
       - name: Check uploaded project archive
         run: |
-          test -s ELIOS_NOTES_v45.zip
-          unzip -t ELIOS_NOTES_v45.zip
+          test -s ELIOS_NOTES_v45_fixed.zip
+          unzip -t ELIOS_NOTES_v45_fixed.zip
 
       - name: Extract Android project
         run: |
           mkdir -p unpacked
-          unzip -q ELIOS_NOTES_v45.zip -d unpacked
+          unzip -q ELIOS_NOTES_v45_fixed.zip -d unpacked
           test -f unpacked/ELIOS_NOTES/app/build.gradle.kts
           test -f unpacked/ELIOS_NOTES/settings.gradle.kts
 
